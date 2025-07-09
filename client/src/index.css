@@ -26,8 +26,8 @@
   
   /* Custom Portfolio Colors */
   --gradient-primary: linear-gradient(-45deg, hsl(222.2, 84%, 4.9%), hsl(215, 28%, 17%), hsl(207, 90%, 54%), hsl(158, 64%, 52%));
-  --glass-bg: hsla(0, 0%, 100%, 0.1);
-  --glass-border: hsla(0, 0%, 100%, 0.2);
+  --glass-bg: hsla(0, 0%, 100%, 0.7);
+  --glass-border: hsla(0, 0%, 0%, 0.1);
   --glass-bg-dark: hsla(222.2, 84%, 4.9%, 0.8);
   --glass-border-dark: hsla(0, 0%, 100%, 0.1);
   --emerald: hsl(158, 64%, 52%);
@@ -55,6 +55,10 @@
   --destructive-foreground: hsl(210, 40%, 98%);
   --ring: hsl(207, 90%, 54%);
   --radius: 0.5rem;
+  
+  /* Dark mode glass colors */
+  --glass-bg: hsla(222.2, 84%, 4.9%, 0.8);
+  --glass-border: hsla(0, 0%, 100%, 0.1);
 }
 
 @layer base {
@@ -82,9 +86,10 @@
   }
   
   .glass-dark {
-    background: var(--glass-bg-dark);
+    background: var(--glass-bg);
     backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border-dark);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
   
   /* Gradient Background */
@@ -104,6 +109,13 @@
   
   /* Neomorphism */
   .neomorph {
+    background: var(--background);
+    box-shadow: 
+      8px 8px 16px hsla(0, 0%, 0%, 0.1),
+      -8px -8px 16px hsla(0, 0%, 100%, 0.05);
+  }
+  
+  .dark .neomorph {
     background: hsl(217.2, 32.6%, 17.5%);
     box-shadow: 
       8px 8px 16px hsla(0, 0%, 0%, 0.5),
