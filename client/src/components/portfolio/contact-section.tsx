@@ -14,11 +14,39 @@ export function ContactSection() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: ''
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! I will get back to you soon.");
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: 'Thank you for your message! I will get back to you soon.' });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -158,7 +186,7 @@ export function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="bg-slate-800 border-slate-700 focus:border-blue-500"
+                    className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
                     required
                   />
                 </div>
@@ -173,7 +201,7 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className="bg-slate-800 border-slate-700 focus:border-blue-500"
+                    className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
                     required
                   />
                 </div>
@@ -188,7 +216,7 @@ export function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Project Discussion"
-                  className="bg-slate-800 border-slate-700 focus:border-blue-500"
+                  className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
                   required
                 />
               </div>
@@ -203,15 +231,25 @@ export function ContactSection() {
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
                   rows={6}
-                  className="bg-slate-800 border-slate-700 focus:border-blue-500"
+                  className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
                   required
                 />
               </div>
+              {submitStatus.message && (
+                <div className={`p-4 rounded-lg ${
+                  submitStatus.type === 'success' 
+                    ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                    : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </motion.div>
