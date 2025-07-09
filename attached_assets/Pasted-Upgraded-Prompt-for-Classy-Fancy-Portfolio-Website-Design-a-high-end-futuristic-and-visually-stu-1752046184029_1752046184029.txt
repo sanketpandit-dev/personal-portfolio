@@ -1,0 +1,60 @@
+Upgraded Prompt for Classy, Fancy Portfolio Website:
+Design a high-end, futuristic, and visually stunning personal portfolio website for Sanket Pandit, a Mumbai-based Software Engineer. The site should blend class, creativity, and cutting-edge design trends, appealing to both tech recruiters and design-savvy visitors.
+
+🖼 Visual Style:
+Use glassmorphism and neumorphism subtly for cards, buttons, and modals
+
+Incorporate animated gradients, scroll-triggered animations, and parallax effects
+
+Add Lottie animations or microinteractions for buttons, skills, and transitions
+
+Use modern font pairings (like Sora, Outfit, or Space Grotesk with light tracking)
+
+Smooth transitions, minimal yet bold — think Apple-level design meets dev portfolio
+
+🎯 Structure & Sections:
+Hero Section: Full-screen intro with animated headline (e.g., “Turning Ideas into Code”), profile image with hover effect, tech stack logos floating or rotating
+
+About Sanket: Rich bio with timeline-style layout; animated text reveal
+
+Skills & Stack: Interactive tech stack cards with hover animations (flip or tilt effect), grouped by category (Langs, Frameworks, Tools, DBs)
+
+Experience Timeline: Animated vertical timeline with job cards (Alphonsol Pvt. Ltd.) and project highlights (Ticketing Tool, Hi Connect App)
+
+Projects Showcase:
+
+Grid layout or carousel with animated mockups (use device frames)
+
+Tags for tech used, popover for descriptions
+
+CTA buttons: View Code / Live Demo
+
+Education: Stylish cards with logos, GPAs, hover slide-in effect for details
+
+Certifications & Internships: Horizontal scroll cards with glass effect
+
+Contact Section: Floating form with wave or bubble animation background
+
+Footer: Classy footer with social icons, copyright, and smooth scroll-up
+
+🧠 Functionality & Features:
+Fully responsive with adaptive layouts for mobile/tablet
+
+Dark/Light mode toggle with smooth transitions
+
+Dynamic cursor with hover effects (e.g., cursor glow or magnet)
+
+Interactive elements: Skills carousel, collapsible project details
+
+Downloadable resume, embedded GitHub stats or contributions
+
+SEO & performance optimized
+
+💡 Additional Touches:
+Use GSAP or Framer Motion for entrance/scroll animations
+
+Add subtle background ambient particles or blobs for a modern touch
+
+Integrate a 3D scene or hero animation using Three.js or Rive for extra polish
+
+Optional: Add a personal blog/notes section in a dev-journal theme
