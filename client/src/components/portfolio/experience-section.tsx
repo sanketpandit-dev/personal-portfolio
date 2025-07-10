@@ -6,7 +6,7 @@ export function ExperienceSection() {
     {
       title: "Software Engineer",
       company: "Alphonsol Pvt Ltd",
-      period: "2023 - Present",
+      period: "Jan 2024 - Present",
       icon: <Briefcase className="w-6 h-6" />,
       color: "text-blue-500",
       achievements: [
@@ -18,7 +18,7 @@ export function ExperienceSection() {
     {
       title: "Web Development Intern",
       company: "PHN Technology",
-      period: "2022",
+      period: "2023",
       icon: <Code className="w-6 h-6" />,
       color: "text-emerald-500",
       achievements: [
