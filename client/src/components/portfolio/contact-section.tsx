@@ -1,61 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
-    type: null,
-    message: ''
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({ type: 'success', message: 'Thank you for your message! I will get back to you soon.' });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again.' });
-      }
-    } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const contactInfo = [
     {
       icon: <Mail className="w-5 h-5" />,
@@ -164,94 +110,36 @@ export function ContactSection() {
             </motion.div>
           </div>
           
-          {/* Contact Form */}
+          {/* Contact Message */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="contact-form glass-dark rounded-2xl p-6"
+            className="glass-dark rounded-2xl p-6 flex items-center justify-center"
           >
-            <h3 className="text-2xl font-semibold mb-6 text-gradient font-mono">
-              Send a Message
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="name" className="text-sm font-medium mb-2">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email" className="text-sm font-medium mb-2">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
-                    required
-                  />
-                </div>
+            <div className="text-center">
+              <div className="mb-6">
+                <Mail className="w-16 h-16 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-2xl font-semibold mb-4 text-gradient font-mono">
+                  Let's Connect!
+                </h3>
+                <p className="text-muted-foreground mb-6 max-w-md">
+                  I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.
+                </p>
               </div>
-              <div>
-                <Label htmlFor="subject" className="text-sm font-medium mb-2">
-                  Subject
-                </Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Project Discussion"
-                  className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
-                  required
-                />
+              <div className="space-y-4">
+                <a
+                  href="mailto:panditsanket2211@gmail.com"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 rounded-lg text-white font-medium"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Email Me
+                </a>
+                <p className="text-sm text-muted-foreground">
+                  or reach out via any of the social platforms
+                </p>
               </div>
-              <div>
-                <Label htmlFor="message" className="text-sm font-medium mb-2">
-                  Message
-                </Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows={6}
-                  className="bg-background border-border focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700"
-                  required
-                />
-              </div>
-              {submitStatus.message && (
-                <div className={`p-4 rounded-lg ${
-                  submitStatus.type === 'success' 
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
-                    : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                }`}>
-                  {submitStatus.message}
-                </div>
-              )}
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
+            </div>
           </motion.div>
         </div>
       </div>
